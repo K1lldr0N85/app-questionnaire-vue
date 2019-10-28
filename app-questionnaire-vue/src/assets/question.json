@@ -1,0 +1,37 @@
+[
+    {
+        "question":"Au Moyen-Âge, comment appelait-on les villages fortifiés ?",
+        "reponse1":"Tour",
+        "reponse2":"Bastide",
+        "reponse3":"Château fort",
+        "reponse4":"Rempart"
+    },
+    {
+        "question":"Comment appelle-t-on le fruit du plaqueminier ?",
+        "reponse1":"Kakou",
+        "reponse2":"Kacha",
+        "reponse3":"Kaki",
+        "reponse4":"Kali"
+    },
+    {
+        "question":"Dans quel film John Travolta incarne-t-il un ange tombé du ciel ?",
+        "reponse1":"Michael",
+        "reponse2":"Johnny",
+        "reponse3":"Jerry",
+        "reponse4":"Sam"
+    },
+    {
+        "question":"De quelle série de six films un champion de boxe est-il la vedette ?",
+        "reponse1":"Ritchie",
+        "reponse2":"Rocky",
+        "reponse3":"Rambo",
+        "reponse4":"Randy"
+    },
+    {
+        "question":"Quelle est la capitale de la Nouvelle-Zélande ?",
+        "reponse1":"Dublin",
+        "reponse2":"Auckland",
+        "reponse3":"Wellington",
+        "reponse4":"Sydney"
+    }
+]
