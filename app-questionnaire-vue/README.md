@@ -29,10 +29,10 @@ Ajout d'un formulaire de connexion admin\n
 Ajout formulaire pour le test\n
 
 ### 28/10
-Matin : bdd put,get\n
-connexion admin\n
-utilisation json\n
+Matin : bdd put,get,
+connexion admin,
+utilisation json,
 
-Après-midi: Génération question avec le json\n
-ajout réponse en BDD
-affichage resultat
+Après-midi: Génération question avec le json,
+ajout réponse en BDD,
+affichage resultat,
