@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import Inscription from '../views/Inscription.vue'
-import Test from '../views/Test.vue'
+import Connexion from '../views/Connexion.vue'
+import Question from '../views/Question.vue'
+import Administration from '../views/Administration.vue'
 
 Vue.use(VueRouter)
 
@@ -13,14 +14,19 @@ const routes = [
     component: Home
   },
   {
-    path: '/inscription',
-    name: 'inscritpion',
-    component: Inscription
+    path: '/connexion',
+    name: 'connexion',
+    component: Connexion
   },
   {
-    path: '/Test',
-    name: 'test',
-    component: Test
+    path: '/Question',
+    name: 'question',
+    component: Question
+  },
+  {
+    path: '/Administration',
+    name: 'Administration',
+    component: Administration
   }
 ]
 

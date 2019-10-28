@@ -2,7 +2,7 @@
   <div id="app">
     <div id="nav">
       <b-button id="button"><router-link to="/">Commencer Test</router-link></b-button>
-      <b-button id="button" class="button"><router-link to="/inscription">Administration</router-link></b-button>
+      <b-button id="button" class="button"><router-link to="/connexion">Administration</router-link></b-button>
     </div>
     <router-view/>
   </div>
