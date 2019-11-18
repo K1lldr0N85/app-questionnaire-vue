@@ -63,15 +63,10 @@ export default {
             context.societe = doc['societe']
             context.result.push(context.nom, context.prenom, context.score, context.societe)
             context.final.push(context.result)
-            console.log('final' + context.final)
             context.result = []
-            console.log(result)
-          }).catch(function (err) {
-            console.log(err)
           })
         }
       }
-      console.log(this.resultPromise)
     })
   },
   methods: {
