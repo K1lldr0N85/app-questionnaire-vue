@@ -3,19 +3,17 @@
     <div class="container">
       <div class="row">
             <div>
-                <b-form-group label="Voici la question hyper importante">
-                <b-form-radio-group
-                    id="radio-group-1"
+              <p v-text="question"></p>
+                <b-form-group>
+                  <b-form-checkbox-group
                     v-model="selected"
                     :options="options"
-                    name="radio-options"
-                ></b-form-radio-group>
-                </b-form-group>
-                </div>
+                    plain
+                  ></b-form-checkbox-group>
+              </b-form-group>
+            </div>
                 <div class="validation">
-                    <router-link to="/">
-                    <b-button id="buttonValidate" v-on:click="test">Question Suivante</b-button>
-                    </router-link>
+                    <b-button id="buttonValidate" v-text="button" v-on:click="next"></b-button>
                 </div>
             </div>
         </div>
@@ -42,34 +40,79 @@
 </style>
 <script>
 import json from '../assets/question.json'
+// import PouchDB from 'pouchdb/dist/pouchdb.js'
 export default {
   data () {
     return {
+      compteur: 0,
+      button: 'Question Suivante',
+      question: '',
+      compt: Math.floor(Math.random() * length),
       myJson: json,
-      selected: 'first',
-      options: [
-        { text: 'Réponse 1', value: 'first' },
-        { text: 'Réponse 2', value: 'second' },
-        { text: 'Réponse 3', value: 'third' },
-        { text: 'Réponse 4', value: '' }
-      ]
+      selected: [],
+      options: [],
+      questionUse: [],
+      result: []
     }
   },
+  created: function () {
+    // this.questionUse.push(this.compt)
+    // this.question = this.myJson[this.compt]['question']
+    // this.selected = this.myJson[this.compt]['reponse1']
+    this.options = [
+      { text: this.myJson[this.compt]['reponse1'], value: this.myJson[this.compt]['reponse1'] },
+      { text: this.myJson[this.compt]['reponse2'], value: this.myJson[this.compt]['reponse2'] },
+      { text: this.myJson[this.compt]['reponse3'], value: this.myJson[this.compt]['reponse3'] },
+      { text: this.myJson[this.compt]['reponse4'], value: this.myJson[this.compt]['reponse4'] }
+    ]
+    console.log(this)
+  },
   methods: {
-    test: function () {
-      console.log(json)
+    next: function () {
+      var context = this
+      this.questionUse.push(this.compt)
+      this.result.push({
+        question: this.myJson[this.compt]['question'],
+        reponse: this.selected,
+        expected: this.myJson[this.compt]['expected']
+      })
+      this.selected = []
+      // console.log(this.result)
+      this.compteur = this.compteur + 1
+      if (this.compteur === 4) {
+        this.button = 'Terminer le test'
+      }
+      if (this.compteur === this.myJson.length) {
+        // var db = new PouchDB('app-questionnaire-vue')
+        // const date = new Date()
+        // db.put({
+        //   _id: date,
+        //   nom: this.$route.params.nom,
+        //   prenom: this.$route.params.prenom,
+        //   societe: this.$route.params.societe,
+        //   questionUse: this.questionUse,
+        //   result: this.result
+        // })
+        // db.get(date).then(function (doc) {
+        //   console.log(doc)
+        // }).catch(function (err) {
+        //   console.log(err)
+        // })
+        context.$router.push({ name: 'resultat', params: { result: this.result, nom: this.$route.params.nom, prenom: this.$route.params.prenom, societe: this.$route.params.societe } })
+      } else {
+        while (this.questionUse.includes(this.compt)) {
+          this.compt = Math.floor(Math.random() * this.myJson.length)
+        }
+        this.question = this.myJson[this.compt]['question']
+        // this.selected = this.myJson[this.compt]['reponse1']
+        this.options = [
+          { text: this.myJson[this.compt]['reponse1'], value: this.myJson[this.compt]['reponse1'] },
+          { text: this.myJson[this.compt]['reponse2'], value: this.myJson[this.compt]['reponse2'] },
+          { text: this.myJson[this.compt]['reponse3'], value: this.myJson[this.compt]['reponse3'] },
+          { text: this.myJson[this.compt]['reponse4'], value: this.myJson[this.compt]['reponse4'] }
+        ]
+      }
     }
   }
 }
 </script>
-<!-- <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
-export default {
-  name: 'home',
-  components: {
-    HelloWorld
-  }
-}
-</script>-->

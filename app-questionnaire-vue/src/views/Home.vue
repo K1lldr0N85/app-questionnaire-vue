@@ -10,9 +10,7 @@
         </div>
       </div>
       <div class="validation">
-        <router-link to="/Question">
         <b-button id="button" v-on:click="Start">Commencer le Test</b-button>
-        </router-link>
       </div>
     </div>
   </div>
@@ -50,17 +48,18 @@ export default {
   methods: {
     Start: function () {
       var db = new PouchDB('app-questionnaire-vue')
-      db.put({
-        _id: '3',
-        name: this.nom,
-        surname: this.prenom,
-        nameS: this.nomSociete
-      })
+      // db.put({
+      //   _id: '3',
+      //   name: this.nom,
+      //   surname: this.prenom,
+      //   nameS: this.nomSociete
+      // })
       db.get('3').then(function (doc) {
         console.log(doc)
       }).catch(function (err) {
         console.log(err)
       })
+      this.$router.push({ name: 'question', params: { nom: this.nom, prenom: this.prenom, societe: this.nomSociete } })
     }
   }
 }
