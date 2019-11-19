@@ -1,15 +1,18 @@
 # app-questionnaire-vue
+
+Lien : https://k1lldr0n85.github.io/#/
+#### Bonne chance pour le test
 ### 23/10
 Initialisation\n
-Ajout d'un formulaire de connexion admin\n
-Ajout formulaire pour le test\n
+Ajout d'un formulaire de connexion admin
+Ajout formulaire pour le test
 
 ### 28/10
-Matin : bdd put,get\n
-connexion admin\n
-utilisation json\n
+Matin : bdd put,get
+connexion admin
+utilisation json
 
-Après-midi: Génération question avec le json\n
+Après-midi: Génération question avec le json
 ajout réponse en BDD
 affichage resultat
 
