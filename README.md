@@ -4,6 +4,7 @@ Lien : https://k1lldr0n85.github.io/#/
 #### Bonne chance pour le test
 
 #### pour l'admin : alois et le password : mdp
+
 ### 23/10
 ```
 Initialisation
@@ -24,9 +25,9 @@ affichage resultat
 
 ### 19/11
 ```
-Page résultat,
-page admin,
-CSS,
+Page résultat
+page admin
+CSS
 git.io
 commentaire
 ```
