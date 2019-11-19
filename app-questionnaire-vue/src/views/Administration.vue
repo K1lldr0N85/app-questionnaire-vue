@@ -29,7 +29,7 @@
  text-align: center ! important;
 }
 .form-input{
-  margin-top: 3% !important;
+  margin-top: 5% !important;
   height: 35%;
   width: 50%;
   margin-right: auto !important;

@@ -27,11 +27,12 @@
  text-align: center ! important;
 }
 .form-input{
-  margin-top: 10%;
+  margin-top: 10% !important;
   height: 35%;
   width: 50%;
   margin-right: auto !important;
   margin-left: auto !important;
+  color:black;
 }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.5/vue.min.js"></script>
