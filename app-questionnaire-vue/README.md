@@ -33,6 +33,6 @@ Matin : bdd put,get,
 connexion admin,
 utilisation json,
 
-Après-midi: Génération question avec le json,
+Après-midi: Génération AMquestion avec le json,
 ajout réponse en BDD,
 affichage resultat,

@@ -3,23 +3,23 @@
     <div class="container">
       <div class="row">
         <div class="form-input">
-           <div v-for="item in result " :key = item class="groupeResult">
-             <p> Question : {{item['question']}}</p>
-             <p>Attendu : {{item['expected']}}</p>
-             <div v-for="rep in item['reponse'] " :key = rep>
-               <div v-if="rep === item['expected']" style="background-color:green" >
-               <p>{{rep}}</p>
+           <div v-for="AMitem in AMresult " :key = AMitem class="groupeResult">
+             <p> Question : {{AMitem['question']}}</p>
+             <p>Attendu : {{AMitem['expected']}}</p>
+             <div v-for="AMrep in AMitem['reponse'] " :key = AMrep>
+               <div v-if="AMrep === AMitem['expected']" style="background-color:green" >
+               <p>{{AMrep}}</p>
                </div>
                <div v-else style="background-color:red">
-                 <p>{{rep}}</p>
+                 <p>{{AMrep}}</p>
                </div>
              </div>
             </div>
-            <p class="score">Score : {{score}}/{{taille}}</p>
+            <p class="score">Score : {{AMscore}}/{{AMtaille}}</p>
         </div>
       </div>
       <div class="validation">
-        <b-button id="button" v-on:click="Start">Retour menu</b-button>
+        <b-button id="button" v-on:click="AMStart">Retour menu</b-button>
       </div>
     </div>
   </div>
@@ -63,59 +63,60 @@ export default {
   name: 'resultat',
   data () {
     return {
-      myJson: json,
-      result: [],
-      score: 0,
-      item: 0,
-      taille: 0,
-      badresp: 0
+      AMmyJson: json,
+      AMresult: [],
+      AMscore: 0,
+      AMitem: 0,
+      AMtaille: 0,
+      AMbadresp: 0
     }
   },
   created: function () {
-    var db = new PouchDB('app-questionnaire-vue')
+    var AMdb = new PouchDB('app-questionnaire-vue')
     // var db = new PouchDB('app-questionnaire-vue')
-    this.result = this.$route.params.result
-    const result = this.$route.params.result
-    console.log(this.result)
+    this.AMresult = this.$route.params.result
+    console.log(this.AMresult)
+    const AMresult = this.$route.params.result
+    console.log(this.AMresult)
     // console.log('test' + datee)
     // console.log(this.doc)
-    // console.log(this.result[0]['reponse'][0])
-    let compt = 0
-    for (var item in result) {
-      compt = compt + 1
-      console.log('compteur' + compt)
+    // console.log(this.AMresult[0]['reponse'][0])
+    let AMcompt = 0
+    for (var AMitem in AMresult) {
+      AMcompt = AMcompt + 1
+      console.log('compteur' + AMcompt)
       let tab = []
-      for (var t in result[item]['reponse']) {
-        tab.push(result[item]['reponse'][t])
+      for (var t in AMresult[AMitem]['reponse']) {
+        tab.push(AMresult[AMitem]['reponse'][t])
       }
-      console.log('expect :' + result[item]['expected'])
+      console.log('expect :' + AMresult[AMitem]['expected'])
       console.log('tab: ' + tab)
-      if (result[item]['expected'] !== tab[0]) {
-        this.badresp = this.badresp - 1
-        console.log('bad' + this.badresp)
+      if (AMresult[AMitem]['expected'] !== tab[0]) {
+        this.AMbadresp = this.AMbadresp - 1
+        console.log('bad' + this.AMbadresp)
       }
-      this.score = compt + this.badresp
-      this.taille = compt
+      this.AMscore = AMcompt + this.AMbadresp
+      this.AMtaille = AMcompt
       console.log(this.response)
     }
-    const date = new Date()
-    db.put({
-      _id: date,
+    const AMdate = new Date()
+    AMdb.put({
+      _id: AMdate,
       nom: this.$route.params.nom,
       prenom: this.$route.params.prenom,
       societe: this.$route.params.societe,
-      score: this.score
+      score: this.AMscore
     })
-    db.get(date).then(function (doc) {
+    AMdb.get(AMdate).then(function (doc) {
       console.log(doc)
     }).catch(function (err) {
       console.log(err)
     })
-    // this.question.push(question)
-    // console.log(this.question)
+    // this.AMquestion.push(AMquestion)
+    // console.log(this.AMquestion)
   },
   methods: {
-    Start: function () {
+    AMStart: function () {
       this.$router.push({ name: 'home' })
     }
   }

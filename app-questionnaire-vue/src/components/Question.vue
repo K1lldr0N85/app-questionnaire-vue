@@ -3,18 +3,18 @@
     <div class="container">
       <div class="row">
             <div class="question">
-              <p v-text="question"></p>
+              <p v-text="AMquestion"></p>
                 <b-form-group class="rep">
                   <b-form-checkbox-group
-                    v-model="selected"
-                    :options="options"
+                    v-model="AMselected"
+                    :options="AMoptions"
                     plain
                   ></b-form-checkbox-group>
               </b-form-group>
             </div>
             </div>
             <div class="validation">
-                    <b-button id="buttonValidate" v-text="button" v-on:click="next"></b-button>
+                    <b-button id="buttonValidate" v-text="AMbutton" v-on:click="AMnext"></b-button>
                 </div>
         </div>
     </div>
@@ -52,75 +52,75 @@ import json from '../assets/question.json'
 export default {
   data () {
     return {
-      compteur: 0,
-      button: 'Question Suivante',
-      question: '',
-      compt: Math.floor(Math.random() * length),
-      myJson: json,
-      selected: [],
-      options: [],
-      questionUse: [],
-      result: []
+      AMcompteur: 0,
+      AMbutton: 'Question Suivante',
+      AMquestion: '',
+      AMcompt: Math.floor(Math.random() * length),
+      AMmyJson: json,
+      AMselected: [],
+      AMoptions: [],
+      AMquestionUse: [],
+      AMresult: []
     }
   },
   created: function () {
-    // this.questionUse.push(this.compt)
-    this.question = this.myJson[this.compt]['question']
-    // this.selected = this.myJson[this.compt]['reponse1']
-    this.options = [
-      { text: this.myJson[this.compt]['reponse1'], value: this.myJson[this.compt]['reponse1'] },
-      { text: this.myJson[this.compt]['reponse2'], value: this.myJson[this.compt]['reponse2'] },
-      { text: this.myJson[this.compt]['reponse3'], value: this.myJson[this.compt]['reponse3'] },
-      { text: this.myJson[this.compt]['reponse4'], value: this.myJson[this.compt]['reponse4'] }
+    // this.AMquestionUse.push(this.AMcompt)
+    this.AMquestion = this.AMmyJson[this.AMcompt]['question']
+    // this.AMselected = this.AMmyJson[this.AMcompt]['reponse1']
+    this.AMoptions = [
+      { text: this.AMmyJson[this.AMcompt]['reponse1'], value: this.AMmyJson[this.AMcompt]['reponse1'] },
+      { text: this.AMmyJson[this.AMcompt]['reponse2'], value: this.AMmyJson[this.AMcompt]['reponse2'] },
+      { text: this.AMmyJson[this.AMcompt]['reponse3'], value: this.AMmyJson[this.AMcompt]['reponse3'] },
+      { text: this.AMmyJson[this.AMcompt]['reponse4'], value: this.AMmyJson[this.AMcompt]['reponse4'] }
     ]
     console.log(this)
   },
   methods: {
-    next: function () {
-      console.log(this.options)
-      var context = this
-      this.questionUse.push(this.compt)
-      this.result.push({
-        question: this.myJson[this.compt]['question'],
-        reponse: this.selected,
-        opt: this.options,
-        expected: this.myJson[this.compt]['expected']
+    AMnext: function () {
+      console.log(this.AMoptions)
+      var AMcontext = this
+      this.AMquestionUse.push(this.AMcompt)
+      this.AMresult.push({
+        question: this.AMmyJson[this.AMcompt]['question'],
+        reponse: this.AMselected,
+        opt: this.AMoptions,
+        expected: this.AMmyJson[this.AMcompt]['expected']
       })
-      console.log(this.options)
-      this.selected = []
-      // console.log(this.result)
-      this.compteur = this.compteur + 1
-      if (this.compteur === 4) {
-        this.button = 'Terminer le test'
+      console.log(this.AMoptions)
+      this.AMselected = []
+      // console.log(this.AMresult)
+      this.AMcompteur = this.AMcompteur + 1
+      if (this.AMcompteur === 4) {
+        this.AMbutton = 'Terminer le test'
       }
-      if (this.compteur === this.myJson.length) {
+      if (this.AMcompteur === this.AMmyJson.length) {
         // var db = new PouchDB('app-questionnaire-vue')
         // const date = new Date()
         // db.put({
         //   _id: date,
-        //   nom: this.$route.params.nom,
+        //   AMnom: this.$route.params.AMnom,
         //   prenom: this.$route.params.prenom,
         //   societe: this.$route.params.societe,
-        //   questionUse: this.questionUse,
-        //   result: this.result
+        //   AMquestionUse: this.AMquestionUse,
+        //   AMresult: this.AMresult
         // })
         // db.get(date).then(function (doc) {
         //   console.log(doc)
         // }).catch(function (err) {
         //   console.log(err)
         // })
-        context.$router.push({ name: 'resultat', params: { result: this.result, nom: this.$route.params.nom, prenom: this.$route.params.prenom, societe: this.$route.params.societe } })
+        AMcontext.$router.push({ name: 'resultat', params: { result: this.AMresult, nom: this.$route.params.nom, prenom: this.$route.params.prenom, societe: this.$route.params.societe } })
       } else {
-        while (this.questionUse.includes(this.compt)) {
-          this.compt = Math.floor(Math.random() * this.myJson.length)
+        while (this.AMquestionUse.includes(this.AMcompt)) {
+          this.AMcompt = Math.floor(Math.random() * this.AMmyJson.length)
         }
-        this.question = this.myJson[this.compt]['question']
-        // this.selected = this.myJson[this.compt]['reponse1']
-        this.options = [
-          { text: this.myJson[this.compt]['reponse1'], value: this.myJson[this.compt]['reponse1'] },
-          { text: this.myJson[this.compt]['reponse2'], value: this.myJson[this.compt]['reponse2'] },
-          { text: this.myJson[this.compt]['reponse3'], value: this.myJson[this.compt]['reponse3'] },
-          { text: this.myJson[this.compt]['reponse4'], value: this.myJson[this.compt]['reponse4'] }
+        this.AMquestion = this.AMmyJson[this.AMcompt]['question']
+        // this.AMselected = this.AMmyJson[this.AMcompt]['reponse1']
+        this.AMoptions = [
+          { text: this.AMmyJson[this.AMcompt]['reponse1'], value: this.AMmyJson[this.AMcompt]['reponse1'] },
+          { text: this.AMmyJson[this.AMcompt]['reponse2'], value: this.AMmyJson[this.AMcompt]['reponse2'] },
+          { text: this.AMmyJson[this.AMcompt]['reponse3'], value: this.AMmyJson[this.AMcompt]['reponse3'] },
+          { text: this.AMmyJson[this.AMcompt]['reponse4'], value: this.AMmyJson[this.AMcompt]['reponse4'] }
         ]
       }
     }

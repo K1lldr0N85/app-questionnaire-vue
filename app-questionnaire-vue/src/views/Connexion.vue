@@ -3,13 +3,13 @@
     <div class="container">
       <div class="row">
         <div class="form-input">
-          <b-form-input  class="input" v-model="login" placeholder="Login"></b-form-input>
-          <b-form-input  class="input" v-model="password" type="password" placeholder="Mot de Passe"></b-form-input>
+          <b-form-input class="input" v-model="AMlogin" placeholder="Login"></b-form-input>
+          <b-form-input class="input" v-model="AMpassword" type="AMpassword" placeholder="Mot de Passe"></b-form-input>
           <!-- <div class="mt-2">Value: {{ text }}</div> -->
         </div>
       </div>
       <div class="validation">
-          <b-button id="buttonValidate" v-on:click="VerificationUser">Valider</b-button>
+          <b-button id="buttonValidate" v-on:click="AMVerificationUser">Valider</b-button>
         </div>
     </div>
   </div>
@@ -44,33 +44,33 @@ export default {
   name: 'home',
     data() {
       return {
-        Administration: "/",
-        login: "",
-        password: ""
+        AMAdministration: "/",
+        AMlogin: "",
+        AMpassword: ""
       }
     },
     methods: {
-        VerificationUser: function () {
-          var db = new PouchDB('app-questionnaire-vue')
-          const login = this.login
-          const password = this.password
-          var context = this
+        AMVerificationUser: function () {
+          var AMdb = new PouchDB('app-questionnaire-vue')
+          const AMlogin = this.AMlogin
+          const AMpassword = this.AMpassword
+          var AMcontext = this
           // db.find({
-          //   selector: {login: this.login, password: this.password},
-          //   fields: ['_id', 'login', 'password'],
-          // }).then(function (result) {
-          //    if( doc.login == login && doc.password == password ){
+          //   selector: {AMlogin: this.AMlogin, AMpassword: this.AMpassword},
+          //   fields: ['_id', 'AMlogin', 'AMpassword'],
+          // }).then(function (AMresult) {
+          //    if( doc.AMlogin == AMlogin && doc.AMpassword == AMpassword ){
           //   console.log("easy")
-          //   Administration = "/Administration"
+          //   AMAdministration = "/AMAdministration"
           // }
           // }).catch(function (err) {
           //   console.log(err);
           // });
-          db.get('1').then(function (doc) {
+          AMdb.get('1').then(function (doc) {
             console.log(doc)
-            if( doc.login == login && doc.password == password ){
+            if( doc.login == AMlogin && doc.password == AMpassword ){
               console.log("easy")
-              context.$router.push({ name: 'Administration' })
+              AMcontext.$router.push({ name: 'Administration' })
             }
           }).catch(function (err) {
             console.log(err)

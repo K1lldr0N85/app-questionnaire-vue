@@ -3,16 +3,16 @@
     <div class="container">
       <div class="row">
         <div class="form-input">
-           <div v-for="item in final " :key = item>
-             <diV v-if=" item[0] !== null">
-             {{item[0]}} / {{item[1]}} / {{item[3]}} / {{item[2]}}
-             <!-- <p>{{item['Nom']}}  {{item['prenom']}} {{item['societe']}} {{item['score']}}</p> -->
+           <div v-for="AMitem in AMfinal " :key = AMitem>
+             <diV v-if=" AMitem[0] !== null">
+               <div class="affichage">{{AMitem[0]}} / {{AMitem[1]}} / {{AMitem[3]}} / {{AMitem[2]}}</div>
+             <!-- <p>{{AMitem['Nom']}}  {{AMitem['prenom']}} {{AMitem['societe']}} {{AMitem['AMscore']}}</p> -->
              </div>
             </div>
         </div>
       </div>
       <div class="validation">
-        <b-button id="button" v-on:click="Start">Retour menu</b-button>
+        <b-button id="button" v-on:click="AMStart">Retour menu</b-button>
       </div>
     </div>
   </div>
@@ -20,6 +20,11 @@
 <style>
 #button{
   background-color: #2a1a5e;
+}
+.affichage{
+  border: solid;
+  border-color: grey;
+  margin-top: 3%;
 }
 .validation{
   margin-top: 8%;
@@ -39,38 +44,38 @@
 <script>
 import PouchDB from 'pouchdb/dist/pouchdb.js'
 export default {
-  name: 'resultat',
+  AMname: 'resultat',
   data () {
     return {
-      result: [],
-      nom: '',
-      prenom: '',
-      score: 0,
-      societe: '',
-      final: []
+      AMresult: [],
+      AMnom: '',
+      AMprenom: '',
+      AMscore: 0,
+      AMsociete: '',
+      AMfinal: []
     }
   },
   created: function () {
-    var db = new PouchDB('app-questionnaire-vue')
-    var context = this
-    this.resultPromise = db.allDocs({}).then(function (result) {
-      for (var item in result) {
-        for (var ind in item) {
-          db.get(result['rows'][ind]['id']).then(function (doc) {
-            context.nom = doc['nom']
-            context.prenom = doc['prenom']
-            context.score = doc['score']
-            context.societe = doc['societe']
-            context.result.push(context.nom, context.prenom, context.score, context.societe)
-            context.final.push(context.result)
-            context.result = []
+    var AMdb = new PouchDB('app-questionnaire-vue')
+    var AMcontext = this
+    this.resultPromise = AMdb.allDocs({}).then(function (AMresult) {
+      for (var AMitem in AMresult) {
+        for (var AMind in AMitem) {
+          AMdb.get(AMresult['rows'][AMind]['id']).then(function (doc) {
+            AMcontext.AMnom = doc['nom']
+            AMcontext.AMprenom = doc['prenom']
+            AMcontext.AMscore = doc['score']
+            AMcontext.AMsociete = doc['societe']
+            AMcontext.AMresult.push(AMcontext.AMnom, AMcontext.AMprenom, AMcontext.AMscore, AMcontext.AMsociete)
+            AMcontext.AMfinal.push(AMcontext.AMresult)
+            AMcontext.AMresult = []
           })
         }
       }
     })
   },
   methods: {
-    Start: function () {
+    AMStart: function () {
       this.$router.push({ name: 'home' })
     }
   }

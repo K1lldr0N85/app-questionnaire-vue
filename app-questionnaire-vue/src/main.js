@@ -8,17 +8,18 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import PouchDB from 'pouchdb/dist/pouchdb.js'
 
 Vue.use(BootstrapVue)
+Vue.config.silent = true
 Vue.config.productionTip = false
 var db = new PouchDB('app-questionnaire-vue')
 // db.destroy()
-db.put({
-  _id: '1',
-  login: 'alois',
-  password: 'mdp'
-})
 db.get('1').then(function (doc) {
   console.log(doc)
 }).catch(function (err) {
+  db.put({
+    _id: '1',
+    login: 'alois',
+    password: 'mdp'
+  })
   console.log(err)
 })
 
