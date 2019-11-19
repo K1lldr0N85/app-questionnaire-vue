@@ -2,6 +2,8 @@
 
 Lien : https://k1lldr0n85.github.io/#/
 #### Bonne chance pour le test
+
+#### pour l'admin : alois et le password : mdp
 ### 23/10
 Initialisation\n
 Ajout d'un formulaire de connexion admin
