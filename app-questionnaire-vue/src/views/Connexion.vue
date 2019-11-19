@@ -4,7 +4,7 @@
       <div class="row">
         <div class="form-input">
           <b-form-input class="input" v-model="AMlogin" placeholder="Login"></b-form-input>
-          <b-form-input class="input" v-model="AMpassword" type="AMpassword" placeholder="Mot de Passe"></b-form-input>
+          <b-form-input class="input" v-model="AMpassword" type="password" placeholder="Mot de Passe"></b-form-input>
           <!-- <div class="mt-2">Value: {{ text }}</div> -->
         </div>
       </div>
@@ -51,6 +51,7 @@ export default {
     },
     methods: {
         AMVerificationUser: function () {
+          // vérifie si l'utilisateur est admin
           var AMdb = new PouchDB('app-questionnaire-vue')
           const AMlogin = this.AMlogin
           const AMpassword = this.AMpassword
@@ -68,8 +69,9 @@ export default {
           // });
           AMdb.get('1').then(function (doc) {
             console.log(doc)
+            // si le login et le password correspond alors on peut rediriger
             if( doc.login == AMlogin && doc.password == AMpassword ){
-              console.log("easy")
+              // redirection vers l'administration
               AMcontext.$router.push({ name: 'Administration' })
             }
           }).catch(function (err) {

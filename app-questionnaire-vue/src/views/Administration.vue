@@ -47,17 +47,18 @@ export default {
   AMname: 'resultat',
   data () {
     return {
-      AMresult: [],
-      AMnom: '',
-      AMprenom: '',
-      AMscore: 0,
-      AMsociete: '',
-      AMfinal: []
+      AMresult: [], // variable contenant les résultats
+      AMnom: '', // variable contenant le nom
+      AMprenom: '', // variable contenant le prénom
+      AMscore: 0, // variable contenant le score
+      AMsociete: '', // variable contenant la société
+      AMfinal: [] // variable stockant tout dans un tableau
     }
   },
   created: function () {
     var AMdb = new PouchDB('app-questionnaire-vue')
     var AMcontext = this
+    // fonction pour récup tout les test réaliser et pouvoir l'afficher
     this.resultPromise = AMdb.allDocs({}).then(function (AMresult) {
       for (var AMitem in AMresult) {
         for (var AMind in AMitem) {

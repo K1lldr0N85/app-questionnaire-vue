@@ -63,34 +63,29 @@ export default {
   name: 'resultat',
   data () {
     return {
-      AMmyJson: json,
-      AMresult: [],
-      AMscore: 0,
-      AMitem: 0,
-      AMtaille: 0,
-      AMbadresp: 0
+      AMmyJson: json, // variable contenant notre json
+      AMresult: [], // variable contenant nos résultats
+      AMscore: 0, // variable calculant le score
+      AMitem: 0, // variable contenant les index d'un tableau
+      AMtaille: 0, // variable contenant la taille d'un tableau
+      AMbadresp: 0 // variable contenant le nombre de mauvaises répones
     }
   },
   created: function () {
     var AMdb = new PouchDB('app-questionnaire-vue')
-    // var db = new PouchDB('app-questionnaire-vue')
     this.AMresult = this.$route.params.result
     console.log(this.AMresult)
     const AMresult = this.$route.params.result
     console.log(this.AMresult)
-    // console.log('test' + datee)
-    // console.log(this.doc)
-    // console.log(this.AMresult[0]['reponse'][0])
+    // compteur pour savoir le nb de question
     let AMcompt = 0
     for (var AMitem in AMresult) {
       AMcompt = AMcompt + 1
-      console.log('compteur' + AMcompt)
       let tab = []
+      // on ajoute au tableau les résultats
       for (var t in AMresult[AMitem]['reponse']) {
         tab.push(AMresult[AMitem]['reponse'][t])
       }
-      console.log('expect :' + AMresult[AMitem]['expected'])
-      console.log('tab: ' + tab)
       if (AMresult[AMitem]['expected'] !== tab[0]) {
         this.AMbadresp = this.AMbadresp - 1
         console.log('bad' + this.AMbadresp)
@@ -99,6 +94,7 @@ export default {
       this.AMtaille = AMcompt
       console.log(this.response)
     }
+    // insert dans la base du nom, prénom, societe du user ainsi que son score
     const AMdate = new Date()
     AMdb.put({
       _id: AMdate,
@@ -116,6 +112,7 @@ export default {
     // console.log(this.AMquestion)
   },
   methods: {
+    // quand click sur retour menu alors on renvoie vers le menu
     AMStart: function () {
       this.$router.push({ name: 'home' })
     }

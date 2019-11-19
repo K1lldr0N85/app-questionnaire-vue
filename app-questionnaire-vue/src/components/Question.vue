@@ -48,22 +48,22 @@
 </style>
 <script>
 import json from '../assets/question.json'
-// import PouchDB from 'pouchdb/dist/pouchdb.js'
 export default {
   data () {
     return {
-      AMcompteur: 0,
-      AMbutton: 'Question Suivante',
-      AMquestion: '',
-      AMcompt: Math.floor(Math.random() * length),
-      AMmyJson: json,
-      AMselected: [],
-      AMoptions: [],
-      AMquestionUse: [],
-      AMresult: []
+      AMcompteur: 0, // variable servant de compteur
+      AMbutton: 'Question Suivante', // variable contenant le libelle du button
+      AMquestion: '', // variable initialisant le question vide
+      AMcompt: Math.floor(Math.random() * length), // variable aléatoire pour le choix des questions
+      AMmyJson: json, // variable contenant le json
+      AMselected: [], // variable contenant l'élément sélectionné
+      AMoptions: [], // variable contenant les options
+      AMquestionUse: [], // variable contenant la question utilisé
+      AMresult: [] // variable contenant les résultats
     }
   },
   created: function () {
+    // Lors de la création on initialise la première question ainsi que ses options
     // this.AMquestionUse.push(this.AMcompt)
     this.AMquestion = this.AMmyJson[this.AMcompt]['question']
     // this.AMselected = this.AMmyJson[this.AMcompt]['reponse1']
@@ -76,46 +76,31 @@ export default {
     console.log(this)
   },
   methods: {
+    // La méthode suivante est appelé lorsque l'on passe à la question suivante
     AMnext: function () {
-      console.log(this.AMoptions)
       var AMcontext = this
+      // on stocke la question qui est utilisé
       this.AMquestionUse.push(this.AMcompt)
+      // on stock le ou les résutats
       this.AMresult.push({
         question: this.AMmyJson[this.AMcompt]['question'],
         reponse: this.AMselected,
-        opt: this.AMoptions,
         expected: this.AMmyJson[this.AMcompt]['expected']
       })
-      console.log(this.AMoptions)
       this.AMselected = []
-      // console.log(this.AMresult)
+      // incrémentation du compteur afin de n'avoir que 5 questions dans le test
       this.AMcompteur = this.AMcompteur + 1
       if (this.AMcompteur === 4) {
         this.AMbutton = 'Terminer le test'
       }
+      // si le test est fini on redirige le user vers son résultat sinon on crée la nouvelle question ainsi que ses options
       if (this.AMcompteur === this.AMmyJson.length) {
-        // var db = new PouchDB('app-questionnaire-vue')
-        // const date = new Date()
-        // db.put({
-        //   _id: date,
-        //   AMnom: this.$route.params.AMnom,
-        //   prenom: this.$route.params.prenom,
-        //   societe: this.$route.params.societe,
-        //   AMquestionUse: this.AMquestionUse,
-        //   AMresult: this.AMresult
-        // })
-        // db.get(date).then(function (doc) {
-        //   console.log(doc)
-        // }).catch(function (err) {
-        //   console.log(err)
-        // })
         AMcontext.$router.push({ name: 'resultat', params: { result: this.AMresult, nom: this.$route.params.nom, prenom: this.$route.params.prenom, societe: this.$route.params.societe } })
       } else {
         while (this.AMquestionUse.includes(this.AMcompt)) {
           this.AMcompt = Math.floor(Math.random() * this.AMmyJson.length)
         }
         this.AMquestion = this.AMmyJson[this.AMcompt]['question']
-        // this.AMselected = this.AMmyJson[this.AMcompt]['reponse1']
         this.AMoptions = [
           { text: this.AMmyJson[this.AMcompt]['reponse1'], value: this.AMmyJson[this.AMcompt]['reponse1'] },
           { text: this.AMmyJson[this.AMcompt]['reponse2'], value: this.AMmyJson[this.AMcompt]['reponse2'] },

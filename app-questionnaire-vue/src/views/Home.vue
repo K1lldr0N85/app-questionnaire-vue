@@ -40,25 +40,14 @@ export default {
   name: 'home',
   data () {
     return {
-      AMnom: '',
-      AMprenom: '',
-      AMnomSociete: ''
+      AMnom: '', // variable contenant le nom de la personne du test
+      AMprenom: '', // variable contenant le prénom de la personne du test
+      AMnomSociete: '' // variable contenant la société de la personne du test
     }
   },
   methods: {
+    // on lance le test
     AMStart: function () {
-      // var AMdb = new PouchDB('app-questionnaire-vue')
-      // db.put({
-      //   _id: '3',
-      //   name: this.AMnom,
-      //   surname: this.prenom,
-      //   nameS: this.nomSociete
-      // })
-      // AMdb.get('1').then(function (doc) {
-      //   console.log(doc)
-      // }).catch(function (err) {
-      //   console.log(err)
-      // })
       this.$router.push({ name: 'question', params: { nom: this.AMnom, prenom: this.AMprenom, societe: this.AMnomSociete } })
     }
   }
