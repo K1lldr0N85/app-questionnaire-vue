@@ -13,14 +13,13 @@ Vue.config.productionTip = false
 var db = new PouchDB('app-questionnaire-vue')
 // db.destroy()
 db.get('1').then(function (doc) {
-  console.log(doc)
 }).catch(function (err) {
   db.put({
     _id: '1',
     login: 'alois',
     password: 'mdp'
   })
-  console.log(err)
+  return err
 })
 
 db.replicate.to('http://127.0.0.1:3306/useradmin')
